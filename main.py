@@ -5,27 +5,33 @@ import json
 from twython import Twython
 from pprint import pprint
 
-# Consumer key aka API key for out beloved twitter named Kaalu
-# Check it out from https://apps.twitter.com/app/7762678/keys
-# dehati_aadmi has made this app/api so only he can access 
-# the above given url
+#proxy settings
+os.environ['http_proxy'] = 'proxy.rolling_friction.in:8080'
+os.environ['https_proxy'] = 'proxy.rolling_friction.in:8080'
+
+# Consumer key aka API key for Kaalu app
 APP_KEY = 'UghjDx0rzAvyJ5zBaFeUjj5Df'
 
 #Consumer Secret aka API secret obtained from above given url
 APP_SECRET = 'YKr17y6745UcFIzZBCLUPD7OPOXxfwDUMsxEksUcR1VuYLh9Xi'
 
-#following tokens are received once a user in this stance 
-# dehati_aadmi authorize the access of app
-OAUTH_TOKEN='2314028468-qPiUja96eCo1rFnvV6RBBAMszwhSBn0dpoPqwRz'
-OAUTH_TOKEN_SECRET='ZPm29rJ8vTeafTQnfrtxpNfKMZlz90HU31XKFYqeM6THS'
+#Getting auth tokens
+twitter = Twython(APP_KEY, APP_SECRET)
+auth = twitter.get_authentication_tokens()
+OAUTH_TOKEN = auth['oauth_token']
+OAUTH_TOKEN_SECRET = auth['oauth_token_secret']
+url=auth['auth_url']
+print 'open this in browser and authorize Kaalu app '+url
+oauth_verifier = raw_input("Provide PIN Number: ")
 
-#proxy settings
-os.environ['http_proxy'] = 'proxy.rolling_friction.in:8080'
-os.environ['https_proxy'] = 'proxy.rolling_friction.in:8080'
-
-
-# Creating a instance of twitter from above given info
 twitter = Twython(APP_KEY, APP_SECRET,OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+final_step = twitter.get_authorized_tokens(oauth_verifier)
+OAUTH_TOKEN = final_step['oauth_token']
+OAUTH_TOKEN_SECRET = final_step['oauth_token_secret']
+
+twitter = Twython(APP_KEY, APP_SECRET,OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+
+# Getting channel number
 chn = raw_input("Give Channel Number: ")
 
 def doit():
@@ -39,7 +45,7 @@ def doit():
 	# Get the size of the array so that we could select the lastest lastest value 
 	n_f=len(json_data["feeds"])
         sensor_value = json_data["feeds"][n_f-1]["field1"] # getting data from field1 only
-        tweet = 'the current sensor value from channel 22764 on thingsspeak is '+str(sensor_value)
+        tweet = 'the current sensor value from channel '+str(chn)+' on thingspeak is '+str(sensor_value)
 	print tweet
 	twitter.update_status(status=tweet)
          

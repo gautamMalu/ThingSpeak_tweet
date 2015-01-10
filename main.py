@@ -3,7 +3,6 @@ import time
 import urllib2
 import json
 from twython import Twython
-from pprint import pprint
 
 #proxy settings
 os.environ['http_proxy'] = 'proxy.rolling_friction.in:8080'

@@ -1,4 +1,4 @@
-# ThingSpeak_tweet_api
+# ThingSpeak_tweet
 This simple api uses twitter's api to post tweet about current sensor value given channel number at https://thingspeak.com/
 
 For private channel you have to also pass API key in url as

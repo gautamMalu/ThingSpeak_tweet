@@ -8,11 +8,11 @@ from twython import Twython
 os.environ['http_proxy'] = 'proxy.rolling_friction.in:8080'
 os.environ['https_proxy'] = 'proxy.rolling_friction.in:8080'
 
-# Consumer key aka API key for Kaalu app
-APP_KEY = 'UghjDx0rzAvyJ5zBaFeUjj5Df'
+# Consumer key aka API key for twitter app
+APP_KEY = 'API Key for twitter app'
 
 #Consumer Secret aka API secret obtained from above given url
-APP_SECRET = 'YKr17y6745UcFIzZBCLUPD7OPOXxfwDUMsxEksUcR1VuYLh9Xi'
+APP_SECRET = 'Consumer Secret'
 
 #Getting auth tokens
 twitter = Twython(APP_KEY, APP_SECRET)

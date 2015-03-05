@@ -1,5 +1,5 @@
 # ThingSpeak_tweet
-This simple script uses Kaalu App on twitter to post tweet about current sensor value given channel number at https://thingspeak.com/
+This simple script uses twitter App on twitter to post tweet about current sensor value given channel number at https://thingspeak.com/
 
 Publicly availabe channels  https://thingspeak.com/channels/public
 
